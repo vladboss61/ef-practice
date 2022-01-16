@@ -12,6 +12,8 @@ namespace ConsoleEFCore
 
         public List<Company> Companies { get; set; }
 
-        public List<SupplyHistory> SupplyHistoriy { get; set; }
+        public List<SupplyHistory> SupplyHistoroy { get; set; }
+
+        public ProductVersion ProductVersion { get; set; }
     }
 }

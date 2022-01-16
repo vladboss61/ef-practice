@@ -1,15 +1,10 @@
 ﻿using ConsoleEFCore.Configurations;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ConsoleEFCore
 {
-    public class ApplicationContext : DbContext
+    public sealed class ApplicationContext : DbContext
     {
-        private readonly string _connectionString;
-
         public DbSet<User> Users { get; set; }
 
         public DbSet<Company> Companies { get; set; }
@@ -18,17 +13,17 @@ namespace ConsoleEFCore
         
         public DbSet<UserProfile> UserProfiles { get; set; }
 
-        public ApplicationContext(string connectionString)
+        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
-            _connectionString = connectionString;
         }
 
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //optionsBuilder.UseMemoryCache();
-            optionsBuilder.UseSqlServer(_connectionString);
-        }
+        #region
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    //optionsBuilder.UseMemoryCache();
+        //    optionsBuilder.UseSqlServer("Connection");
+        //}
+        #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

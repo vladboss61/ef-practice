@@ -6,11 +6,12 @@ namespace ConsoleEFCore
 {
     public sealed class SupplyHistory
     {
-        public int Id { get; set; }
+        public int SupplyHistoryId { get; set; }
         
-        public int ProductId { get; set; }
-       
-        public Product Product { get; set; }
+        public int ProductId { get; set; } // FK Table Product
+
+
+        public Product Product { get; set; } // Ref Table Product
     
         public int CompanyId { get; set; }
         

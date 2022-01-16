@@ -5,19 +5,41 @@ using System.Linq;
 
 namespace ConsoleEFCore
 {
-    class Program
+    public sealed class Program
     {
-        static void Main(string[] args)
-        {
-            using (var context = new ApplicationContext("Data Source=DESKTOP-EEE2PPD;Initial Catalog = Application;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
-            {
-                var users = context.Users.ToList();
-                var companies = context.Companies.ToList();
+        #region
+        //protected override void Up(MigrationBuilder migrationBuilder)
+        //{
+        //    migrationBuilder.CreateTable(
+        //        name: "ProductVersion",
+        //        columns: table => new
+        //        {
+        //            Id = table.Column<int>(type: "int", nullable: false),
+        //            Version = table.Column<string>(type: "nvarchar(max)", nullable: true),
+        //        },
+        //        constraints: table =>
+        //        {
+        //            table.PrimaryKey("PK_ProductVersionId", x => x.Id);
+        //        });
+        //}
 
+        //protected override void Down(MigrationBuilder migrationBuilder)
+        //{
+        //    migrationBuilder.DropTable("ProductVersion");
+        //}
+        #endregion
+
+        internal static void Main(string[] args)
+        {
+            using (var context = new ApplicationContextFactory().CreateDbContext(Array.Empty<string>()))
+            {
+                IQueryable<User> users1 = context.Users.Where(x => x.FirstName.Contains("A"));
+                var sqlQueriable = users1.ToSql();
+                Console.WriteLine(sqlQueriable);
                 DbSet<Product> products = context.Products; // SELECT * FROM dbo.Products
                 IQueryable<Product> products2 = context.Products.Where(x => x.Name.Equals("Audi")); // SELECT * FROM dbo.Products as p WHERE p.Name = "Audi"
 
-                var userProfiles = context.UserProfiles.ToList();
+                //var userProfiles = context.UserProfiles.ToList();
             }
             Console.WriteLine("Hello World!");
         }
