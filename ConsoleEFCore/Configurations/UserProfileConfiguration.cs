@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ConsoleEFCore.DbModels;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,8 @@ namespace ConsoleEFCore.Configurations
         public void Configure(EntityTypeBuilder<UserProfile> builder)
         {
             builder
-               .ToTable("UserProfile")
-               .HasKey(p => p.Id);
+                .ToTable("UserProfile")
+                .HasKey(p => p.Id);
         }
     }
 }

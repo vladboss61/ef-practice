@@ -10,7 +10,7 @@ namespace ConsoleEFCore
     {
         public ApplicationContext CreateDbContext(string[] args)
         {
-            var connectionString = "Data Source=DESKTOP-EEE2PPD;Initial Catalog = Application;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            var connectionString = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=Application;Integrated Security=True";
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
             var options = optionsBuilder
                 .UseSqlServer(connectionString)

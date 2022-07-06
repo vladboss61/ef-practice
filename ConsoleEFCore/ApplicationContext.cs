@@ -1,5 +1,7 @@
 ﻿using ConsoleEFCore.Configurations;
+using ConsoleEFCore.DbModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace ConsoleEFCore
 {
@@ -17,6 +19,7 @@ namespace ConsoleEFCore
         {
         }
 
+
         #region
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
@@ -27,8 +30,9 @@ namespace ConsoleEFCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new CarConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
-            modelBuilder.ApplyConfiguration(new CompanyConfguration());
+            modelBuilder.ApplyConfiguration(new CompanyConfiguration());
             modelBuilder.ApplyConfiguration(new UserProfileConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
         }

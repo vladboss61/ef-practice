@@ -1,12 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ConsoleEFCore.DbModels;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ConsoleEFCore.Configurations
 {
-    public class CompanyConfguration : IEntityTypeConfiguration<Company>
+    public class CompanyConfiguration : IEntityTypeConfiguration<Company>
     {
         public void Configure(EntityTypeBuilder<Company> builder)
         {
