@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleEFCore.DbModels
 {
-    public class Car
+    public sealed class Car
     {
         public int Id { get; set; }
 
