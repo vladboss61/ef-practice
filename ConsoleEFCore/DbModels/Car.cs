@@ -13,5 +13,9 @@ namespace ConsoleEFCore.DbModels
         public string Name { get; set; }
         
         public int Size { get; set; }
+
+        public string Color { get; set; }
+
+        public string Color1 { get; set; }
     }
 }

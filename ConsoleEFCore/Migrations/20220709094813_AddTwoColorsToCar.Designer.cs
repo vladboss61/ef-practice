@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConsoleEFCore.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220708102622_InitCreateDatabase")]
-    partial class InitCreateDatabase
+    [Migration("20220709094813_AddTwoColorsToCar")]
+    partial class AddTwoColorsToCar
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,14 @@ namespace ConsoleEFCore.Migrations
                         .HasColumnName("CarId");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Color")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)")
+                        .HasColumnName("Color");
+
+                    b.Property<string>("Color1")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasMaxLength(50)

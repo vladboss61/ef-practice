@@ -21,6 +21,11 @@ namespace ConsoleEFCore.Configurations
                 .HasColumnName("Name_Car")
                 .HasMaxLength(50);
 
+            builder
+                .Property(c => c.Color)
+                .HasColumnName("Color")
+                .HasMaxLength(150);
+
             builder.HasData(new []
             {
                 new Car

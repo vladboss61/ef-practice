@@ -34,8 +34,6 @@ namespace ConsoleEFCore
         {
             using (ApplicationContext context = new ApplicationContextFactory().CreateDbContext(Array.Empty<string>()))
             {
-                //context.Database.EnsureCreated();
-
                 var fixedUser = context.Users.ToArray();
 
                 var allUsers = context.Users.Include(x => x.Company);
