@@ -1,9 +1,9 @@
-﻿using ConsoleEFCore.Configurations;
-using ConsoleEFCore.DbModels;
+﻿using ConsoleEFCoreLazy.Configurations;
+using ConsoleEFCoreLazy.DbModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace ConsoleEFCore
+namespace ConsoleEFCoreLazy
 {
     public sealed class ApplicationContext : DbContext
     {
@@ -14,8 +14,6 @@ namespace ConsoleEFCore
         public DbSet<Product> Products { get; set; }
         
         public DbSet<UserProfile> UserProfiles { get; set; }
-
-        public DbSet<SupplyHistory> SupplyHistories { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {

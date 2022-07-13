@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace ConsoleEFCore
 {
@@ -30,24 +32,57 @@ namespace ConsoleEFCore
         //}
         #endregion
 
-        internal static void Main(string[] args)
+        internal static async Task Main(string[] args)
         {
-            using (ApplicationContext context = new ApplicationContextFactory().CreateDbContext(Array.Empty<string>()))
+            await using (ApplicationContext context = new ApplicationContextFactory().CreateDbContext(Array.Empty<string>()))
             {
-                var fixedUser = context.Users.ToArray();
+                //var eagerUsers =
+                //    context.Users
+                //        .Include(x => x.Company)
+                //        .Include(x => x.Profile)
+                //        .ToList(); // Eager Loading of Related Data
 
-                var allUsers = context.Users.Include(x => x.Company);
+                //context.Users.Join(context.Companies, user => user.CompanyId, // JOIN in Code
+                //    company => company.Id,
+                //    (user, company) => new { User = user, Company = company });
 
-                context.Users.Join(context.Companies, user => user.CompanyId,
-                    company => company.Id,
-                    (user, company) => new { User = user, Company = company });
+                var explicitUsers = context .Users;
 
-                var firsUser = context.Users.SingleOrDefault(x => x.Id == 1);
-
-                if (firsUser is not null)
+                foreach (var user in explicitUsers)
                 {
-                    firsUser.LastName = "New FirstName - firsUser";
+                    await context
+                        .Entry(user)
+                        .Reference(b => b.Company)
+                        .LoadAsync();
                 }
+
+                var companies2 = context.Companies;
+                foreach (var comp in companies2)
+                {
+                    await context.SupplyHistories
+                        .Where(x => x.SupplyHistoryId == comp.Id)
+                        .LoadAsync();
+
+                    await context
+                        .Entry(comp)// Explicit Loading.
+                        .Collection(b => b.SupplyHistory)
+                        .LoadAsync();
+                }
+
+                foreach (var comp in companies2)
+                {
+                    IQueryable<SupplyHistory> supps = context
+                        .Entry(comp) // Explicit Loading.
+                        .Collection(b => b.SupplyHistory)
+                        .Query();
+                }
+
+                //var firsUser = context.Users.SingleOrDefault(x => x.Id == 1);
+
+                //if (firsUser is not null)
+                //{
+                //    firsUser.LastName = "New FirstName - firsUser";
+                //}
 
                 var secondUser = context.Users.SingleOrDefault(x => x.Id == 2);
 
@@ -59,10 +94,10 @@ namespace ConsoleEFCore
                 context.SaveChanges();
                 IQueryable<User> users1 = context.Users.Where(x => x.FirstName.Contains("A"));
                 
-                var sqlQueriable = users1.ToSql();
+                var sqlQueryable = users1.ToSql();
                 var newWay = users1.ToQueryString();
 
-                Console.WriteLine(sqlQueriable);
+                Console.WriteLine(sqlQueryable);
 
                 IEnumerable<User> users2 = context.Users.AsEnumerable().Where(x => x.FirstName.Contains("A")); // SELECT * FROM dbo.Products 
 

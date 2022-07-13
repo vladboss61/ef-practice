@@ -1,11 +1,11 @@
-﻿using ConsoleEFCore.DbModels;
+﻿using ConsoleEFCoreLazy.DbModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsoleEFCore.Configurations
+namespace ConsoleEFCoreLazy.Configurations
 {
     public sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
@@ -24,8 +24,6 @@ namespace ConsoleEFCore.Configurations
                 .HasColumnName("Name")
                 .IsRequired()
                 .HasMaxLength(255);
-
-            
         }
     }
 }
