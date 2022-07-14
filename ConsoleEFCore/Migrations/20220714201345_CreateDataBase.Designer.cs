@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConsoleEFCore.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220714191447_CreateDataBase")]
+    [Migration("20220714201345_CreateDataBase")]
     partial class CreateDataBase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,8 @@ namespace ConsoleEFCore.Migrations
             modelBuilder.Entity("ConsoleEFCore.DbModels.Car", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("CarId");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Color")
                         .HasMaxLength(150)
@@ -71,11 +68,8 @@ namespace ConsoleEFCore.Migrations
             modelBuilder.Entity("ConsoleEFCore.DbModels.Company", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("CompanyId");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("FoundationDate")
                         .HasColumnType("datetime2");
@@ -99,14 +93,14 @@ namespace ConsoleEFCore.Migrations
                         new
                         {
                             Id = 99,
-                            FoundationDate = new DateTime(2022, 7, 14, 19, 14, 46, 670, DateTimeKind.Utc).AddTicks(3438),
+                            FoundationDate = new DateTime(2022, 7, 14, 20, 13, 44, 994, DateTimeKind.Utc).AddTicks(9263),
                             Name = "A-Level",
                             Revenue = 1000m
                         },
                         new
                         {
                             Id = 199,
-                            FoundationDate = new DateTime(2022, 7, 15, 19, 14, 46, 670, DateTimeKind.Utc).AddTicks(3442),
+                            FoundationDate = new DateTime(2022, 7, 15, 20, 13, 44, 994, DateTimeKind.Utc).AddTicks(9267),
                             Name = "Spotify",
                             ProductId = 999,
                             Revenue = 2000m
@@ -116,11 +110,8 @@ namespace ConsoleEFCore.Migrations
             modelBuilder.Entity("ConsoleEFCore.DbModels.Product", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("ProductId");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -194,10 +185,7 @@ namespace ConsoleEFCore.Migrations
             modelBuilder.Entity("ConsoleEFCore.DbModels.User", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
@@ -223,7 +211,7 @@ namespace ConsoleEFCore.Migrations
                             Id = 77,
                             CompanyId = 99,
                             FirstName = "FirstName10",
-                            HiredDate = new DateTime(2022, 7, 14, 19, 14, 46, 670, DateTimeKind.Utc).AddTicks(4124),
+                            HiredDate = new DateTime(2022, 7, 14, 20, 13, 44, 995, DateTimeKind.Utc).AddTicks(62),
                             LastName = "FirstName10"
                         });
                 });
@@ -231,10 +219,7 @@ namespace ConsoleEFCore.Migrations
             modelBuilder.Entity("ConsoleEFCore.DbModels.UserProfile", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("About")
                         .HasColumnType("nvarchar(max)");

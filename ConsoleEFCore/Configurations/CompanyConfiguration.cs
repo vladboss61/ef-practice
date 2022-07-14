@@ -15,7 +15,8 @@ namespace ConsoleEFCore.Configurations
 
             builder
                 .Property(p => p.Id)
-                .HasColumnName("CompanyId");
+                .HasColumnName("CompanyId")
+                .ValueGeneratedNever();
 
             builder.HasData(new Company
             {

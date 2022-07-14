@@ -13,8 +13,7 @@ namespace ConsoleEFCore.Migrations
                 name: "Car",
                 columns: table => new
                 {
-                    CarId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CarId = table.Column<int>(type: "int", nullable: false),
                     Name_Car = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Size = table.Column<int>(type: "int", nullable: false),
                     Color = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
@@ -29,8 +28,7 @@ namespace ConsoleEFCore.Migrations
                 name: "Product",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
@@ -42,8 +40,7 @@ namespace ConsoleEFCore.Migrations
                 name: "Company",
                 columns: table => new
                 {
-                    CompanyId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CompanyId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Revenue = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     FoundationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -111,8 +108,7 @@ namespace ConsoleEFCore.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HiredDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -133,8 +129,7 @@ namespace ConsoleEFCore.Migrations
                 name: "UserProfile",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     About = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: false)
@@ -162,7 +157,7 @@ namespace ConsoleEFCore.Migrations
             migrationBuilder.InsertData(
                 table: "Company",
                 columns: new[] { "CompanyId", "FoundationDate", "Name", "ProductId", "Revenue" },
-                values: new object[] { 99, new DateTime(2022, 7, 14, 19, 14, 46, 670, DateTimeKind.Utc).AddTicks(3438), "A-Level", null, 1000m });
+                values: new object[] { 99, new DateTime(2022, 7, 14, 20, 13, 44, 994, DateTimeKind.Utc).AddTicks(9263), "A-Level", null, 1000m });
 
             migrationBuilder.InsertData(
                 table: "Product",
@@ -172,12 +167,12 @@ namespace ConsoleEFCore.Migrations
             migrationBuilder.InsertData(
                 table: "Company",
                 columns: new[] { "CompanyId", "FoundationDate", "Name", "ProductId", "Revenue" },
-                values: new object[] { 199, new DateTime(2022, 7, 15, 19, 14, 46, 670, DateTimeKind.Utc).AddTicks(3442), "Spotify", 999, 2000m });
+                values: new object[] { 199, new DateTime(2022, 7, 15, 20, 13, 44, 994, DateTimeKind.Utc).AddTicks(9267), "Spotify", 999, 2000m });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "CompanyId", "FirstName", "HiredDate", "LastName" },
-                values: new object[] { 77, 99, "FirstName10", new DateTime(2022, 7, 14, 19, 14, 46, 670, DateTimeKind.Utc).AddTicks(4124), "FirstName10" });
+                values: new object[] { 77, 99, "FirstName10", new DateTime(2022, 7, 14, 20, 13, 44, 995, DateTimeKind.Utc).AddTicks(62), "FirstName10" });
 
             migrationBuilder.InsertData(
                 table: "UserProfile",

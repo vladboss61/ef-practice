@@ -15,6 +15,10 @@ namespace ConsoleEFCore.Configurations
                 .ToTable("UserProfile")
                 .HasKey(p => p.Id);
 
+            builder
+                .Property(p => p.Id)
+                .ValueGeneratedNever();
+
             builder.HasData(new UserProfile
             {
                 Id = 88,

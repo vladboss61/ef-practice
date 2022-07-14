@@ -36,7 +36,41 @@ namespace ConsoleEFCore
         {
             await using (ApplicationContext context = new ApplicationContextFactory().CreateDbContext(Array.Empty<string>()))
             {
-                var explicitUsers = context .Users;
+                context
+                    .Companies
+                    .Add(new Company
+                    {
+                        Id = 3999,
+                        FoundationDate = DateTime.UtcNow,
+                        Name = "A-Code",
+                        Revenue = 2500
+                    });
+
+
+                context
+                    .UserProfiles
+                    .Add(new UserProfile
+                    {
+                         Id = 2000,
+                         UserId = 2777,
+                         About = "In Code User Profile",
+                         ImageUrl = "123"
+                    });
+
+                context
+                    .Users
+                    .Add(new User
+                    {
+                        Id = 2777,
+                        CompanyId = 3999,
+                        FirstName = "FirstName10 SaveChangesAsync",
+                        LastName = "LastName SaveChangesAsync",
+                        HiredDate = DateTime.UtcNow,
+                    });
+
+                await context.SaveChangesAsync();
+
+                var explicitUsers = context.Users;
 
                 foreach (var user in explicitUsers)
                 {
