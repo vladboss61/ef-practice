@@ -36,16 +36,6 @@ namespace ConsoleEFCore
         {
             await using (ApplicationContext context = new ApplicationContextFactory().CreateDbContext(Array.Empty<string>()))
             {
-                //var eagerUsers =
-                //    context.Users
-                //        .Include(x => x.Company)
-                //        .Include(x => x.Profile)
-                //        .ToList(); // Eager Loading of Related Data
-
-                //context.Users.Join(context.Companies, user => user.CompanyId, // JOIN in Code
-                //    company => company.Id,
-                //    (user, company) => new { User = user, Company = company });
-
                 var explicitUsers = context .Users;
 
                 foreach (var user in explicitUsers)
@@ -77,12 +67,6 @@ namespace ConsoleEFCore
                         .Query();
                 }
 
-                //var firsUser = context.Users.SingleOrDefault(x => x.Id == 1);
-
-                //if (firsUser is not null)
-                //{
-                //    firsUser.LastName = "New FirstName - firsUser";
-                //}
 
                 var secondUser = context.Users.SingleOrDefault(x => x.Id == 2);
 

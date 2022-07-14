@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ConsoleEFCore.Migrations
 {
-    public partial class InitCreateDatabase : Migration
+    public partial class CreateDataBase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,7 +16,9 @@ namespace ConsoleEFCore.Migrations
                     CarId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name_Car = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Size = table.Column<int>(type: "int", nullable: false)
+                    Size = table.Column<int>(type: "int", nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
+                    Color1 = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -78,7 +80,7 @@ namespace ConsoleEFCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SupplyHistory",
+                name: "SupplyHistories",
                 columns: table => new
                 {
                     SupplyHistoryId = table.Column<int>(type: "int", nullable: false)
@@ -90,15 +92,15 @@ namespace ConsoleEFCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SupplyHistory", x => x.SupplyHistoryId);
+                    table.PrimaryKey("PK_SupplyHistories", x => x.SupplyHistoryId);
                     table.ForeignKey(
-                        name: "FK_SupplyHistory_Company_CompanyId",
+                        name: "FK_SupplyHistories_Company_CompanyId",
                         column: x => x.CompanyId,
                         principalTable: "Company",
                         principalColumn: "CompanyId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SupplyHistory_Product_ProductId",
+                        name: "FK_SupplyHistories_Product_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Product",
                         principalColumn: "ProductId",
@@ -150,13 +152,37 @@ namespace ConsoleEFCore.Migrations
 
             migrationBuilder.InsertData(
                 table: "Car",
-                columns: new[] { "CarId", "Name_Car", "Size" },
-                values: new object[] { 1, "Audi", 250 });
+                columns: new[] { "CarId", "Color", "Color1", "Name_Car", "Size" },
+                values: new object[,]
+                {
+                    { 1, null, null, "Audi", 250 },
+                    { 2, null, null, "Ford", 350 }
+                });
 
             migrationBuilder.InsertData(
-                table: "Car",
-                columns: new[] { "CarId", "Name_Car", "Size" },
-                values: new object[] { 2, "Ford", 350 });
+                table: "Company",
+                columns: new[] { "CompanyId", "FoundationDate", "Name", "ProductId", "Revenue" },
+                values: new object[] { 99, new DateTime(2022, 7, 14, 19, 14, 46, 670, DateTimeKind.Utc).AddTicks(3438), "A-Level", null, 1000m });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "ProductId", "Name" },
+                values: new object[] { 999, "Music Play" });
+
+            migrationBuilder.InsertData(
+                table: "Company",
+                columns: new[] { "CompanyId", "FoundationDate", "Name", "ProductId", "Revenue" },
+                values: new object[] { 199, new DateTime(2022, 7, 15, 19, 14, 46, 670, DateTimeKind.Utc).AddTicks(3442), "Spotify", 999, 2000m });
+
+            migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] { "Id", "CompanyId", "FirstName", "HiredDate", "LastName" },
+                values: new object[] { 77, 99, "FirstName10", new DateTime(2022, 7, 14, 19, 14, 46, 670, DateTimeKind.Utc).AddTicks(4124), "FirstName10" });
+
+            migrationBuilder.InsertData(
+                table: "UserProfile",
+                columns: new[] { "Id", "About", "ImageUrl", "UserId" },
+                values: new object[] { 88, "Some additional info", "123", 77 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Company_ProductId",
@@ -170,13 +196,13 @@ namespace ConsoleEFCore.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_SupplyHistory_CompanyId",
-                table: "SupplyHistory",
+                name: "IX_SupplyHistories_CompanyId",
+                table: "SupplyHistories",
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SupplyHistory_ProductId",
-                table: "SupplyHistory",
+                name: "IX_SupplyHistories_ProductId",
+                table: "SupplyHistories",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
@@ -200,7 +226,7 @@ namespace ConsoleEFCore.Migrations
                 name: "ProductVersion");
 
             migrationBuilder.DropTable(
-                name: "SupplyHistory");
+                name: "SupplyHistories");
 
             migrationBuilder.DropTable(
                 name: "UserProfile");

@@ -92,6 +92,23 @@ namespace ConsoleEFCore.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Company", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 99,
+                            FoundationDate = new DateTime(2022, 7, 14, 19, 14, 46, 670, DateTimeKind.Utc).AddTicks(3438),
+                            Name = "A-Level",
+                            Revenue = 1000m
+                        },
+                        new
+                        {
+                            Id = 199,
+                            FoundationDate = new DateTime(2022, 7, 15, 19, 14, 46, 670, DateTimeKind.Utc).AddTicks(3442),
+                            Name = "Spotify",
+                            ProductId = 999,
+                            Revenue = 2000m
+                        });
                 });
 
             modelBuilder.Entity("ConsoleEFCore.DbModels.Product", b =>
@@ -112,6 +129,13 @@ namespace ConsoleEFCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Product", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 999,
+                            Name = "Music Play"
+                        });
                 });
 
             modelBuilder.Entity("ConsoleEFCore.DbModels.ProductVersion", b =>
@@ -162,7 +186,7 @@ namespace ConsoleEFCore.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("SupplyHistory");
+                    b.ToTable("SupplyHistories");
                 });
 
             modelBuilder.Entity("ConsoleEFCore.DbModels.User", b =>
@@ -190,6 +214,16 @@ namespace ConsoleEFCore.Migrations
                     b.HasIndex("CompanyId");
 
                     b.ToTable("User", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 77,
+                            CompanyId = 99,
+                            FirstName = "FirstName10",
+                            HiredDate = new DateTime(2022, 7, 14, 19, 14, 46, 670, DateTimeKind.Utc).AddTicks(4124),
+                            LastName = "FirstName10"
+                        });
                 });
 
             modelBuilder.Entity("ConsoleEFCore.DbModels.UserProfile", b =>
@@ -215,13 +249,24 @@ namespace ConsoleEFCore.Migrations
                         .IsUnique();
 
                     b.ToTable("UserProfile", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 88,
+                            About = "Some additional info",
+                            ImageUrl = "123",
+                            UserId = 77
+                        });
                 });
 
             modelBuilder.Entity("ConsoleEFCore.DbModels.Company", b =>
                 {
-                    b.HasOne("ConsoleEFCore.DbModels.Product", null)
+                    b.HasOne("ConsoleEFCore.DbModels.Product", "Product")
                         .WithMany("Companies")
                         .HasForeignKey("ProductId");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("ConsoleEFCore.DbModels.ProductVersion", b =>
@@ -257,7 +302,7 @@ namespace ConsoleEFCore.Migrations
             modelBuilder.Entity("ConsoleEFCore.DbModels.User", b =>
                 {
                     b.HasOne("ConsoleEFCore.DbModels.Company", "Company")
-                        .WithMany()
+                        .WithMany("Users")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -279,6 +324,8 @@ namespace ConsoleEFCore.Migrations
             modelBuilder.Entity("ConsoleEFCore.DbModels.Company", b =>
                 {
                     b.Navigation("SupplyHistory");
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("ConsoleEFCore.DbModels.Product", b =>

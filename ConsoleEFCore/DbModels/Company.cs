@@ -13,6 +13,12 @@ namespace ConsoleEFCore.DbModels
 
         public DateTime FoundationDate { get; set; }
 
+        public Product Product { get; set; }
+
+        public int? ProductId { get; set; }
+
+        public List<User> Users { get; set; }
+
         public List<SupplyHistory> SupplyHistory { get; set; }
     }
 }

@@ -14,6 +14,14 @@ namespace ConsoleEFCore.Configurations
             builder
                 .ToTable("UserProfile")
                 .HasKey(p => p.Id);
+
+            builder.HasData(new UserProfile
+            {
+                Id = 88,
+                About = "Some additional info",
+                ImageUrl = "123",
+                UserId = 77
+            });
         }
     }
 }

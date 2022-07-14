@@ -15,20 +15,13 @@ namespace ConsoleEFCore.Configurations
                 .ToTable("User")
                 .HasKey(p => p.Id);
 
-
-            builder.HasData(new Company
-            {
-                Id = 10
-            });
-
             builder.HasData(new User
             {
-                Id = 10,
-                CompanyId = 1,
+                Id = 77,
+                CompanyId = 99,
                 FirstName = "FirstName10",
                 LastName = "FirstName10",
                 HiredDate = DateTime.UtcNow,
-                Profile = null
             });
         }
     }

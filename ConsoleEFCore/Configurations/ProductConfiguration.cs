@@ -25,7 +25,13 @@ namespace ConsoleEFCore.Configurations
                 .IsRequired()
                 .HasMaxLength(255);
 
-            
+
+            builder.HasData(new Product
+            {
+                Id = 999,
+                Name = "Music Play",
+            });
+
         }
     }
 }

@@ -34,7 +34,15 @@ namespace ConsoleEFCoreLazy
         {
             using (ApplicationContext context = new ApplicationContextFactory().CreateDbContext(Array.Empty<string>()))
             {
-                var fixedUser = context.Users.ToArray();
+                var users1 = context
+                    .Users
+                    .Include(user => user.Company)
+                    .ThenInclude(company => company.SupplyHistory);
+
+                var users2 = context
+                    .Users
+                    .Include(x => x.Company)
+                    .Include(user => user.Profile);
 
                 var companies = context.Users.Select(x => x.Company);
 
